@@ -5,7 +5,7 @@ import { useRouter } from "next/navigation";
 import Image from "next/image";
 import Navbar from "@/components/navbar";
 import { HeartIcon, BookmarkIcon } from "@heroicons/react/24/outline";
-import { createClient } from "@/lib/supabase/client";
+import { createClient as createSupabaseClient } from "@supabase/supabase-js";
 
 type Story = {
   id: string;
@@ -218,5 +218,10 @@ export default function StoriesPage() {
       </section>
     </>
   );
+}
+function createClient() {
+  const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL!;
+  const supabaseAnonKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!;
+  return createSupabaseClient(supabaseUrl, supabaseAnonKey);
 }
 

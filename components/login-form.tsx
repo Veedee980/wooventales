@@ -1,15 +1,11 @@
 "use client";
 
-export const dynamic = 'force-dynamic'; // disables static prerendering
-
 import { useState } from "react";
 import { useRouter } from "next/navigation";
-import { createClient } from "@/lib/supabase/client";
+import { supabaseClient } from "@/lib/supabase/client"; // <-- use client-only instance
 import Link from "next/link";
 
-
 export default function LoginPage() {
-  const supabase = createClient();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [message, setMessage] = useState<string | null>(null);
@@ -22,7 +18,7 @@ export default function LoginPage() {
     setMessage(null);
 
     try {
-      const { error } = await supabase.auth.signInWithPassword({ email, password });
+      const { error } = await supabaseClient.auth.signInWithPassword({ email, password });
       if (error) throw error;
       router.push("/protected");
     } catch (error: unknown) {
@@ -98,6 +94,7 @@ export default function LoginPage() {
     </div>
   );
 }
+
 
 
 

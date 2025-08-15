@@ -6,7 +6,8 @@ import Navbar from "@/components/navbar";
 import Footer from "@/components/footer";
 import { FaDownload, FaPlay, FaPause } from "react-icons/fa";
 import { MdArrowBack } from "react-icons/md";
-import { createClient } from "@/lib/supabase/client";
+import { supabaseClient } from "@/lib/supabase/client";
+const supabase = supabaseClient;
 
 type Story = {
   id: string;
@@ -17,7 +18,6 @@ type Story = {
 };
 
 export default function StoryDetailPage() {
-  const supabase = createClient();
   const { id } = useParams();
   const router = useRouter();
 
@@ -83,7 +83,7 @@ export default function StoryDetailPage() {
 
     loadVoices();
     window.speechSynthesis.onvoiceschanged = loadVoices;
-  }, [id, supabase, selectedVoice]);
+  }, [id, selectedVoice]);
 
   const handleDownload = () => {
     if (!story) return;
