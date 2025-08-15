@@ -83,19 +83,20 @@ export default function Navbar() {
             </>
           ) : (
             <>
-              <Link href="/profile">
-                {user.user_metadata?.avatar_url ? (
-                  <Image
-                    width={32}
-                    height={32}
-                    src={user.user_metadata.avatar_url}
-                    alt="Profile"
-                    className="rounded-full border border-violet-400"
-                  />
-                ) : (
-                  <UserIcon className="text-violet-300 w-6 h-6" />
-                )}
-              </Link>
+ <Link href="/protected">
+  {user.user_metadata?.avatar_url ? (
+    <Image
+      src={user.user_metadata.avatar_url}
+      alt="Profile"
+      width={48}
+      height={48}
+      className="w-12 h-12 rounded-full border border-violet-400"
+    />
+  ) : (
+    <UserIcon className="text-violet-300 w-8 h-8" />
+  )}
+</Link>
+
               <button
                 onClick={handleLogout}
                 className="px-4 py-1 rounded-full border border-rose-500 text-rose-400 font-semibold hover:bg-rose-500/20 transition"
