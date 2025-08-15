@@ -1,3 +1,8 @@
+"use client";
+
+export const dynamic = 'force-dynamic'; // disables static prerendering
+
+
 import SignupPage from "@/components/sign-up-form";
 
 export default function Page() {
