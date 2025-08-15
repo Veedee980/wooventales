@@ -1,36 +1,28 @@
 // lib/supabase/server.ts
 import { createServerClient } from "@supabase/ssr";
-import { createClient as createBrowserClient } from "@supabase/supabase-js";
+import { cookies } from "next/headers";
 
-// Detect if we can use `next/headers` (App Router server environment)
-let cookiesFn: (() => Promise<unknown>) | null;
-try {
-  // This import will fail in Pages Router
-  cookiesFn = (await import("next/headers")).cookies;
-} catch {
-  cookiesFn = null;
-}
+export async function createServerSupabaseClient() {
+  const cookieStore = cookies();
 
-export async function createClient() {
-  if (cookiesFn) {
-    // App Router (Server Component)
-    const cookieStore = await cookiesFn() as { get: (name: string) => { value?: string } | undefined };
-    return createServerClient(
-      process.env.NEXT_PUBLIC_SUPABASE_URL!,
-      process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!,
-      {
-        cookies: {
-          get(name: string) {
-            return cookieStore.get(name)?.value;
-          },
+  return createServerClient(
+    process.env.NEXT_PUBLIC_SUPABASE_URL!,
+    process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!,
+    {
+      cookies: {
+        async getAll() {
+          return (await cookieStore).getAll();
         },
-      }
-    );
-  } else {
-    // Pages Router or non-server environment — fallback to browser client
-    return createBrowserClient(
-      process.env.NEXT_PUBLIC_SUPABASE_URL!,
-      process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!
-    );
-  }
+        setAll(cookiesToSet) {
+          try {
+            cookiesToSet.forEach(async ({ name, value, options }) =>
+              (await cookieStore).set(name, value, options)
+            );
+          } catch {
+            // Called from Server Component; ignore if just refreshing session
+          }
+        },
+      },
+    }
+  );
 }
