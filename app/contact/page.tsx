@@ -1,4 +1,7 @@
 "use client";
+
+export const dynamic = 'force-dynamic'; // disables static prerendering
+
 import Navbar from "@/components/navbar";
 import Footer from "@/components/footer";
 import Image from "next/image";

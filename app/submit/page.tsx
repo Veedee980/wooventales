@@ -1,4 +1,7 @@
 "use client";
+
+export const dynamic = 'force-dynamic'; // disables static prerendering
+
 import Navbar from "@/components/navbar";
 
 export default function SubmitTalePage() {

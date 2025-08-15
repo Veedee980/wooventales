@@ -1,3 +1,8 @@
+"use client";
+
+export const dynamic = 'force-dynamic'; // disables static prerendering
+
+
 import LoginPage from "@/components/login-form";
 
 export default function Page() {

@@ -1,3 +1,8 @@
+"use client";
+
+export const dynamic = 'force-dynamic'; // disables static prerendering
+
+
 import { DeployButton } from "@/components/deploy-button";
 import { EnvVarWarning } from "@/components/env-var-warning";
 import { AuthButton } from "@/components/auth-button";

@@ -1,4 +1,6 @@
-'use client'
+"use client";
+
+export const dynamic = 'force-dynamic'; // disables static prerendering
 
 import React from 'react'
 import Image from 'next/image'

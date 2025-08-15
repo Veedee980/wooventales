@@ -1,3 +1,8 @@
+"use client";
+
+export const dynamic = 'force-dynamic'; // disables static prerendering
+
+
 import React from "react";
 import Link from "next/link";
 
