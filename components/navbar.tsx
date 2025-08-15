@@ -83,7 +83,7 @@ export default function Navbar() {
             </>
           ) : (
             <>
- <Link href="/protected">
+ <Link href="/protected" className="flex items-center gap-2">
   {user.user_metadata?.avatar_url ? (
     <Image
       src={user.user_metadata.avatar_url}

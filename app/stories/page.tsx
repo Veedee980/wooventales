@@ -1,7 +1,5 @@
 "use client";
 
-export const dynamic = 'force-dynamic'; // disables static prerendering
-
 import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import Image from "next/image";
