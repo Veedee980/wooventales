@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Geist } from "next/font/google";
 import { ThemeProvider } from "next-themes";
+import { SupabaseProvider } from "@/components/providers";
 import "./globals.css";
 
 const defaultUrl = process.env.VERCEL_URL
@@ -21,9 +22,9 @@ const geistSans = Geist({
 
 export default function RootLayout({
   children,
-}: Readonly<{
+}: {
   children: React.ReactNode;
-}>) {
+}) {
   return (
     <html lang="en" suppressHydrationWarning>
       <body className={`${geistSans.variable} antialiased`} suppressHydrationWarning>
@@ -33,7 +34,9 @@ export default function RootLayout({
           enableSystem
           disableTransitionOnChange
         >
-          {children}
+          <SupabaseProvider>
+            {children}
+          </SupabaseProvider>
         </ThemeProvider>
       </body>
     </html>
