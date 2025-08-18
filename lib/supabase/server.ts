@@ -1,7 +1,5 @@
-// lib/supabase/server.ts
 import { createServerClient } from "@supabase/ssr";
 import { cookies } from "next/headers";
-
 
 export async function createServerSupabaseClient() {
   const cookieStore = cookies();
@@ -20,7 +18,7 @@ export async function createServerSupabaseClient() {
               (await cookieStore).set(name, value, options)
             );
           } catch {
-            // Called from Server Component; ignore if just refreshing session
+            // Ignore on Server Components refresh
           }
         },
       },
