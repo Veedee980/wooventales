@@ -1,7 +1,8 @@
 import Link from "next/link";
 import { Button } from "./ui/button";
-import { createServerSupabaseClient } from "@/lib/supabase/server"; // ✅ call the function
+// Update this import to match the actual export from your server module
 import { LogoutButton } from "./logout-button";
+import { createServerSupabaseClient } from "@supabase/auth-helpers-nextjs";
 
 export default async function AuthButton() {
   // Create the Supabase client for the server
