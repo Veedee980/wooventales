@@ -1,8 +1,14 @@
+// RootLayout.tsx
+"use client";
+
 import type { Metadata } from "next";
 import { Geist } from "next/font/google";
 import { ThemeProvider } from "next-themes";
 import { SupabaseProvider } from "@/components/providers";
 import "./globals.css";
+
+// Make this layout dynamic to avoid prerender errors with Supabase
+export const dynamic = "force-dynamic";
 
 const defaultUrl = process.env.VERCEL_URL
   ? `https://${process.env.VERCEL_URL}`
